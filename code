@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simple Course Website</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+  }
+
+  /* Header */
+  header {
+    background: #2a62ff;
+    padding: 20px;
+    color: white;
+    text-align: center;
+  }
+
+  nav {
+    background: #1f1f1f;
+    padding: 10px 0;
+    text-align: center;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+  }
+
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+  /* Hero Section */
+  .hero {
+    background: #e8edff;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  .hero p {
+    font-size: 18px;
+    color: #555;
+  }
+
+  /* Courses */
+  .courses {
+    max-width: 1000px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+  }
+
+  .course-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .course-card h3 {
+    margin-top: 0;
+  }
+
+  .course-card p {
+    color: #666;
+  }
+
+  .course-card button {
+    margin-top: 10px;
+    padding: 10px 16px;
+    background: #2a62ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .course-card button:hover {
+    background: #1e4bdd;
+  }
+
+  /* Footer */
+  footer {
+    background: #1f1f1f;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>My Course Website</h1>
+  <p>Learn New Skills Anytime, Anywhere</p>
+</header>
+
+<nav>
+  <a href="#login">Login</a>
+  <a href="#home">Home</a>
+  <a href="#courses">Courses</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- Login Section -->
+<section id="login" style="max-width:400px;margin:40px auto;background:#ffffff;padding:25px;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+  <h2 style="text-align:center;margin-top:0;">Login</h2>
+  <form>
+    <label>Email</label>
+    <input type="email" placeholder="Enter your email" required style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:4px;">
+
+    <label>Password</label>
+    <input type="password" placeholder="Enter your password" required style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:4px;">
+
+    <button type="submit" style="width:100%;padding:10px;background:#2a62ff;color:white;border:none;border-radius:4px;cursor:pointer;margin-top:10px;">Login</button>
+  </form>
+</section>
+
+<section class="hero" id="home">
+  <h1>Welcome to Our Learning Platform</h1>
+  <p>Choose from a variety of simple and beginner-friendly courses</p>
+</section>
+
+<section class="courses" id="courses">
+  <div class="course-card">
+    <h3>HTML Basics</h3>
+    <p>Learn the structure of web pages using HTML.</p>
+    <button>Enroll Now</button>
+  </div>
+
+  <div class="course-card">
+    <h3>CSS Styling</h3>
+    <p>Make your websites beautiful with CSS.</p>
+    <button>Enroll Now</button>
+  </div>
+
+  <div class="course-card">
+    <h3>JavaScript Essentials</h3>
+    <p>Start adding interactivity to your websites.</p>
+    <button>Enroll Now</button>
+  </div>
+
+  <div class="course-card">
+    <h3>Python for Beginners</h3>
+    <p>Learn the basics of Python programming.</p>
+    <button>Enroll Now</button>
+  </div>
+</section>
+
+<footer>
+  © 2025 Simple Course Website | All Rights Reserved
+</footer>
+
+</body>
+</html>
