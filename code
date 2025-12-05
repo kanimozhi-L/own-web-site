@@ -1,170 +1,181 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Simple Course Website</title>
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f7fa;
-  }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Course Website - Login</title>
+  <style>
+    :root{--bg:#f4f7fb;--card:#fff;--accent:#3b82f6;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;background:var(--bg);color:#111}
+    .center{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
 
-  /* Header */
-  header {
-    background: #2a62ff;
-    padding: 20px;
-    color: white;
-    text-align: center;
-  }
+    /* Login card */
+    .card{background:var(--card);width:100%;max-width:420px;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,42,0.08);padding:28px}
+    h1{margin:0 0 6px;font-size:20px}
+    p.lead{margin:0 0 18px;color:var(--muted)}
+    label{display:block;font-size:13px;margin-bottom:6px;color:var(--muted)}
+    input[type=text],input[type=password]{width:100%;padding:10px 12px;border:1px solid #e6e9ef;border-radius:8px;font-size:15px}
+    .actions{display:flex;align-items:center;justify-content:space-between;margin-top:16px}
+    button.primary{background:var(--accent);color:#fff;border:0;padding:10px 16px;border-radius:8px;font-weight:600;cursor:pointer}
+    button.ghost{background:transparent;color:var(--accent);border:1px solid rgba(59,130,246,0.15);padding:8px 12px;border-radius:8px;cursor:pointer}
+    .error{color:#b91c1c;font-size:13px;margin-top:10px;display:none}
 
-  nav {
-    background: #1f1f1f;
-    padding: 10px 0;
-    text-align: center;
-  }
+    /* Course site styles */
+    header.siteHeader{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;background:#fff;border-bottom:1px solid #eef2f7}
+    header .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,#60a5fa,#06b6d4);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    nav .logout{background:transparent;border:1px solid #e6eefc;color:var(--accent);padding:8px 12px;border-radius:8px;cursor:pointer}
+    main.container{padding:28px}
+    .hero{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:22px}
+    .hero h2{margin:0;font-size:22px}
+    .courses{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .course{background:#fff;padding:14px;border-radius:10px;box-shadow:0 4px 12px rgba(15,23,42,0.04)}
+    .course h3{margin:0 0 6px;font-size:16px}
+    .course p{margin:0;color:var(--muted);font-size:14px}
 
-  nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 16px;
-  }
-
-  nav a:hover {
-    text-decoration: underline;
-  }
-
-  /* Hero Section */
-  .hero {
-    background: #e8edff;
-    padding: 60px 20px;
-    text-align: center;
-  }
-
-  .hero h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
-  }
-
-  .hero p {
-    font-size: 18px;
-    color: #555;
-  }
-
-  /* Courses */
-  .courses {
-    max-width: 1000px;
-    margin: 40px auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 0 20px;
-  }
-
-  .course-card {
-    background: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .course-card h3 {
-    margin-top: 0;
-  }
-
-  .course-card p {
-    color: #666;
-  }
-
-  .course-card button {
-    margin-top: 10px;
-    padding: 10px 16px;
-    background: #2a62ff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .course-card button:hover {
-    background: #1e4bdd;
-  }
-
-  /* Footer */
-  footer {
-    background: #1f1f1f;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    margin-top: 40px;
-  }
-</style>
+    /* Responsive */
+    @media (max-width:600px){.hero{flex-direction:column;align-items:flex-start}}
+  </style>
 </head>
 <body>
+  <div id="app">
+    <!-- Login view -->
+    <div id="loginView" class="center">
+      <div class="card" role="region" aria-labelledby="loginTitle">
+        <h1 id="loginTitle">Welcome back</h1>
+        <p class="lead">Sign in to access your courses</p>
 
-<header>
-  <h1>My Course Website</h1>
-  <p>Learn New Skills Anytime, Anywhere</p>
-</header>
+        <form id="loginForm" onsubmit="return false;" autocomplete="off">
+          <div>
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" placeholder="student" required>
+          </div>
+          <div style="margin-top:12px">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" placeholder="password" required>
+          </div>
 
-<nav>
-  <a href="#login">Login</a>
-  <a href="#home">Home</a>
-  <a href="#courses">Courses</a>
-  <a href="#about">About</a>
-  <a href="#contact">Contact</a>
-</nav>
+          <div class="actions">
+            <button id="loginBtn" class="primary" type="submit">Sign in</button>
+            <button id="demoBtn" class="ghost" type="button">Use demo creds</button>
+          </div>
 
-<!-- Login Section -->
-<section id="login" style="max-width:400px;margin:40px auto;background:#ffffff;padding:25px;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,0.1);">
-  <h2 style="text-align:center;margin-top:0;">Login</h2>
-  <form>
-    <label>Email</label>
-    <input type="email" placeholder="Enter your email" required style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:4px;">
+          <div id="err" class="error" role="alert">Invalid credentials</div>
+        </form>
+      </div>
+    </div>
 
-    <label>Password</label>
-    <input type="password" placeholder="Enter your password" required style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:4px;">
+    <!-- Courses view (hidden until login) -->
+    <div id="coursesView" style="display:none">
+      <header class="siteHeader">
+        <div class="brand">
+          <div class="logo">CW</div>
+          <div>
+            <div style="font-weight:700">Course Website</div>
+            <div style="font-size:13px;color:var(--muted)">Student dashboard</div>
+          </div>
+        </div>
+        <nav>
+          <button id="logoutBtn" class="logout">Logout</button>
+        </nav>
+      </header>
 
-    <button type="submit" style="width:100%;padding:10px;background:#2a62ff;color:white;border:none;border-radius:4px;cursor:pointer;margin-top:10px;">Login</button>
-  </form>
-</section>
+      <main class="container">
+        <section class="hero">
+          <div>
+            <h2>Your courses</h2>
+            <p style="color:var(--muted);margin:6px 0 0">Welcome — the following courses are available to you.</p>
+          </div>
+          <div style="text-align:right;color:var(--muted)">
+            <div id="welcomeUser" style="font-weight:600"></div>
+            <div style="font-size:13px">Member since 2025</div>
+          </div>
+        </section>
 
-<section class="hero" id="home">
-  <h1>Welcome to Our Learning Platform</h1>
-  <p>Choose from a variety of simple and beginner-friendly courses</p>
-</section>
-
-<section class="courses" id="courses">
-  <div class="course-card">
-    <h3>HTML Basics</h3>
-    <p>Learn the structure of web pages using HTML.</p>
-    <button>Enroll Now</button>
+        <section class="courses" id="coursesList">
+          <!-- Course cards will be injected by JS -->
+        </section>
+      </main>
+    </div>
   </div>
 
-  <div class="course-card">
-    <h3>CSS Styling</h3>
-    <p>Make your websites beautiful with CSS.</p>
-    <button>Enroll Now</button>
-  </div>
+  <script>
+    // Demo credentials
+    const DEMO_USER = 'student';
+    const DEMO_PASS = 'password';
 
-  <div class="course-card">
-    <h3>JavaScript Essentials</h3>
-    <p>Start adding interactivity to your websites.</p>
-    <button>Enroll Now</button>
-  </div>
+    const loginView = document.getElementById('loginView');
+    const coursesView = document.getElementById('coursesView');
+    const loginForm = document.getElementById('loginForm');
+    const err = document.getElementById('err');
+    const welcomeUser = document.getElementById('welcomeUser');
 
-  <div class="course-card">
-    <h3>Python for Beginners</h3>
-    <p>Learn the basics of Python programming.</p>
-    <button>Enroll Now</button>
-  </div>
-</section>
+    const courses = [
+      {title: 'HTML & CSS Fundamentals', desc: 'Learn the building blocks of the web.'},
+      {title: 'JavaScript for Beginners', desc: 'Interactive programming and DOM manipulation.'},
+      {title: 'Responsive Design', desc: 'Create layouts that work on any device.'},
+      {title: 'Backend Basics', desc: 'Intro to servers, databases and APIs.'},
+      {title: 'Project Capstone', desc: 'Build a complete website from scratch.'}
+    ];
 
-<footer>
-  © 2025 Simple Course Website | All Rights Reserved
-</footer>
+    function showCourses(username){
+      // populate welcome
+      welcomeUser.textContent = username;
 
+      // populate course cards
+      const list = document.getElementById('coursesList');
+      list.innerHTML = '';
+      for(const c of courses){
+        const card = document.createElement('article');
+        card.className = 'course';
+        card.innerHTML = `<h3>${escapeHtml(c.title)}</h3><p>${escapeHtml(c.desc)}</p>`;
+        list.appendChild(card);
+      }
+
+      // switch views
+      loginView.style.display = 'none';
+      coursesView.style.display = 'block';
+    }
+
+    function escapeHtml(s){
+      return s.replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[ch]));
+    }
+
+    // Simple client-side login (demo only) - do not use for real auth
+    document.getElementById('loginBtn').addEventListener('click', () => {
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value;
+      err.style.display = 'none';
+
+      if(!user || !pass){
+        err.textContent = 'Please enter username and password';
+        err.style.display = 'block';
+        return;
+      }
+
+      // Check demo credentials
+      if(user === DEMO_USER && pass === DEMO_PASS){
+        showCourses(user);
+      } else {
+        err.textContent = 'Invalid credentials — try "student" / "password"';
+        err.style.display = 'block';
+      }
+    });
+
+    document.getElementById('demoBtn').addEventListener('click', () => {
+      document.getElementById('username').value = DEMO_USER;
+      document.getElementById('password').value = DEMO_PASS;
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      // clear inputs and return to login
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
+      err.style.display = 'none';
+      coursesView.style.display = 'none';
+      loginView.style.display = 'flex';
+    });
+  </script>
 </body>
 </html>
